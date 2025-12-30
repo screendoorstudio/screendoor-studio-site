@@ -69,7 +69,7 @@ export default function Home() {
       <footer className="py-8 px-6 animate-fade-in-delay-3 relative z-10">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-4">
           <Image
-            src="/logo.jpg"
+            src="/logo.png"
             alt="Screendoor Studio"
             width={180}
             height={60}
