@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Particles from "@/components/Particles";
 
 export default function Home() {
   const services = [
@@ -16,11 +17,23 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-1 flex flex-col items-center justify-center px-6">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Background layers */}
+      <div className="gradient-bg" />
+      <div className="grid-overlay" />
+      <Particles />
+      <div className="noise" />
+      <div className="scan-lines" />
+
+      <main className="flex-1 flex flex-col items-center justify-center px-6 relative z-10">
         <div className="text-center max-w-2xl">
+          {/* Tagline */}
+          <p className="font-pixel text-3xl sm:text-4xl md:text-5xl text-accent tagline-glow animate-fade-in mb-8">
+            make things
+          </p>
+
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight animate-fade-in">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight animate-fade-in-delay-1 glitch cursor-default">
             <span className="text-accent">SCREEN</span>
             <span className="text-foreground">DOOR</span>
             <span className="block text-lg sm:text-xl md:text-2xl font-light tracking-[0.3em] text-muted mt-2">
@@ -29,7 +42,7 @@ export default function Home() {
           </h1>
 
           {/* Services */}
-          <p className="mt-12 text-muted text-sm sm:text-base leading-relaxed animate-fade-in-delay-1">
+          <p className="mt-12 text-muted text-sm sm:text-base leading-relaxed animate-fade-in-delay-2">
             {services.map((service, index) => (
               <span key={service}>
                 {service}
@@ -41,7 +54,7 @@ export default function Home() {
           </p>
 
           {/* Contact */}
-          <div className="mt-16 animate-fade-in-delay-2">
+          <div className="mt-16 animate-fade-in-delay-3">
             <a
               href="mailto:jake@screendoorstudio.com"
               className="email-link inline-block text-foreground/70 text-sm tracking-widest uppercase hover:text-accent transition-all duration-300"
@@ -53,14 +66,14 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 px-6 animate-fade-in-delay-2">
+      <footer className="py-8 px-6 animate-fade-in-delay-3 relative z-10">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-4">
           <Image
             src="/logo.jpg"
             alt="Screendoor Studio"
             width={180}
             height={60}
-            className="opacity-70 hover:opacity-100 transition-opacity duration-300"
+            className="opacity-50 hover:opacity-100 transition-opacity duration-500"
           />
           <div className="text-center text-muted text-xs tracking-wide">
             <p>Birmingham, Alabama</p>
