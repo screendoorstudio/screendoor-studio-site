@@ -27,19 +27,19 @@ export default function Home() {
 
       <main className="flex-1 flex flex-col items-center justify-center px-6 relative z-10">
         <div className="text-center max-w-2xl">
-          {/* Tagline */}
-          <p className="font-pixel text-3xl sm:text-4xl md:text-5xl text-accent tagline-glow animate-fade-in mb-8">
-            make things
-          </p>
-
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight animate-fade-in-delay-1 glitch cursor-default">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight animate-fade-in glitch cursor-default">
             <span className="text-accent">SCREEN</span>
             <span className="text-foreground">DOOR</span>
             <span className="block text-lg sm:text-xl md:text-2xl font-light tracking-[0.3em] text-muted mt-2">
               STUDIO
             </span>
           </h1>
+
+          {/* Tagline */}
+          <p className="font-pixel text-3xl sm:text-4xl md:text-5xl text-accent tagline-glow animate-fade-in-delay-1 mt-8">
+            make things
+          </p>
 
           {/* Services */}
           <p className="mt-12 text-muted text-sm sm:text-base leading-relaxed animate-fade-in-delay-2">
