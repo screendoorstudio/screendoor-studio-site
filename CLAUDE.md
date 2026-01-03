@@ -27,7 +27,8 @@ screendoor-studio-site/
 ├── public/
 │   ├── logo.png         # 2025 logo (footer)
 │   ├── door-creak.mp3   # Creaky door opening sound
-│   └── door-slam.mp3    # Door slam closing sound
+│   ├── door-slam.mp3    # Door slam closing sound
+│   └── hubble/          # NASA Hubble Deep Field images (shown behind door)
 └── tailwind.config.ts   # Custom colors from logo
 ```
 
@@ -55,12 +56,15 @@ screendoor-studio-site/
 - Sound effects from BigSoundBank.com (CC0 public domain):
   - `door-creak.mp3` - Creaky door sound on open (slow animation)
   - `door-slam.mp3` - Door slam on close (fast animation)
-- Hover glow effect, click instruction text below
+- Random NASA Hubble Deep Field image revealed behind door when opened
+- Hover glow effect
 
 ### Content
 - Title: SCREENDOOR STUDIO
 - Tagline: "make things" (VT323 pixel font)
-- Services: words, music, video, design, products, marketing, business, non-profits, consulting, AI, research
+- Services (two centered rows):
+  - Row 1: marketing · design · research · strategy · writing · video · music
+  - Row 2: products · apps · analytics · lead generation · AI integration · consulting
 - Contact: jake@screendoorstudio.com
 - Footer: 2025 logo, Birmingham Alabama, © 2026 Screendoor Studio Inc.
 
@@ -90,6 +94,13 @@ Located in parent `logos/` folder:
 - `ScreendoorStudio_logo_Jake-Waitzman_Birmingham.jpg` - Original logo
 
 ## Session Notes
+
+### Jan 2, 2026
+- Updated services list to: marketing, design, research, strategy, writing, video, music, products, apps, analytics, lead generation, AI integration, consulting
+- Reformatted services into two centered rows (7 + 6 words)
+- Removed "click to open/close" instruction text from screen door
+- Added Hubble Deep Field images behind screen door (random image on each open)
+- Images sourced from NASA SVS and NASA Science (public domain)
 
 ### Dec 29, 2024 (Evening)
 - Added interactive ScreenDoor component with 3D hinge animation
