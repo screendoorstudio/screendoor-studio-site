@@ -83,6 +83,18 @@ npx vercel --yes --prod
 git add . && git commit -m "message" && git push
 ```
 
+## Development Guidelines
+
+### Mobile-First Layout
+- Always use **flexbox with flex-wrap** for text/content that needs to wrap on mobile
+- Avoid inline text that can get cut off on narrow screens
+- Use `whitespace-nowrap` on individual items to keep multi-word phrases together
+
+### Audio on Mobile
+- Use **Web Audio API** instead of HTMLAudioElement for instant playback
+- Initialize AudioContext on first user interaction (mobile requirement)
+- Preload audio buffers for zero-latency playback
+
 ## DNS Configuration
 Domain managed via FatCow nameservers, pointing to Vercel:
 - A Record: `screendoorstudio.com` → `76.76.21.21`
@@ -97,11 +109,13 @@ Located in parent `logos/` folder:
 
 ### Jan 2, 2026
 - Updated services list to: marketing, design, research, strategy, writing, video, music, products, apps, analytics, lead generation, AI integration, consulting
-- Reformatted services into two centered rows (7 + 6 words)
+- Reformatted services into two centered rows (7 + 6 words) on desktop
 - Removed "click to open/close" instruction text from screen door
 - Added Hubble Deep Field images behind screen door (random image on each open)
 - Images sourced from NASA SVS and NASA Science (public domain)
 - Fixed Hubble image positioning to align flush with door frame border
+- Fixed mobile text cutoff using flexbox with flex-wrap
+- Fixed mobile audio delay by switching to Web Audio API with preloaded buffers
 
 ### Dec 29, 2024 (Evening)
 - Added interactive ScreenDoor component with 3D hinge animation
