@@ -101,6 +101,7 @@ Located in parent `logos/` folder:
 - Removed "click to open/close" instruction text from screen door
 - Added Hubble Deep Field images behind screen door (random image on each open)
 - Images sourced from NASA SVS and NASA Science (public domain)
+- Fixed Hubble image positioning to align flush with door frame border
 
 ### Dec 29, 2024 (Evening)
 - Added interactive ScreenDoor component with 3D hinge animation
