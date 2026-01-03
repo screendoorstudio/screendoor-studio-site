@@ -2,9 +2,19 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 
+const hubbleImages = [
+  "/hubble/hudf-1024px.jpg",
+  "/hubble/hudf-2014.webp",
+  "/hubble/hdf-south.webp",
+  "/hubble/hxdf-extreme.webp",
+  "/hubble/hdf-central-portion.webp",
+  "/hubble/hdf-sample-galaxies.jpg",
+];
+
 export default function ScreenDoor() {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [currentImage, setCurrentImage] = useState(hubbleImages[0]);
   const creakAudioRef = useRef<HTMLAudioElement | null>(null);
   const slamAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -37,8 +47,10 @@ export default function ScreenDoor() {
     setIsAnimating(true);
 
     if (!isOpen) {
-      // Opening - play creaky sound
+      // Opening - play creaky sound and pick random image
       playCreak();
+      const randomImage = hubbleImages[Math.floor(Math.random() * hubbleImages.length)];
+      setCurrentImage(randomImage);
     }
 
     if (isOpen) {
@@ -58,7 +70,7 @@ export default function ScreenDoor() {
 
   return (
     <div
-      className="screen-door-container"
+      className="screen-door-container relative"
       style={{ perspective: "1000px" }}
     >
       <div
@@ -191,6 +203,36 @@ export default function ScreenDoor() {
             </linearGradient>
           </defs>
         </svg>
+      </div>
+
+      {/* Hubble image behind door */}
+      <div
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        style={{ zIndex: -2 }}
+      >
+        <div
+          className="absolute"
+          style={{
+            top: "10px",
+            left: "28px",
+            width: "144px",
+            height: "344px",
+            overflow: "hidden",
+            borderRadius: "2px",
+          }}
+        >
+          <img
+            src={currentImage}
+            alt="Hubble Deep Field"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              opacity: isOpen ? 1 : 0,
+              transition: "opacity 0.5s ease-in-out",
+            }}
+          />
+        </div>
       </div>
 
       {/* Door frame (stays in place) */}

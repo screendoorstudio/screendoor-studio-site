@@ -50,16 +50,24 @@ export default function Home() {
           </p>
 
           {/* Services */}
-          <p className="mt-12 text-muted text-sm sm:text-base leading-relaxed animate-fade-in-delay-2">
-            {services.map((service, index) => (
-              <span key={service}>
-                {service}
-                {index < services.length - 1 && (
-                  <span className="mx-2 opacity-30">·</span>
-                )}
-              </span>
-            ))}
-          </p>
+          <div className="mt-12 text-muted text-sm sm:text-base leading-relaxed animate-fade-in-delay-2 text-center">
+            <p>
+              {services.slice(0, 7).map((service, index) => (
+                <span key={service}>
+                  {service}
+                  {index < 6 && <span className="mx-2 opacity-30">·</span>}
+                </span>
+              ))}
+            </p>
+            <p className="mt-1">
+              {services.slice(7).map((service, index) => (
+                <span key={service}>
+                  {service}
+                  {index < services.length - 8 && <span className="mx-2 opacity-30">·</span>}
+                </span>
+              ))}
+            </p>
+          </div>
 
           {/* Contact */}
           <div className="mt-16 animate-fade-in-delay-3">
