@@ -50,16 +50,16 @@ export default function Home() {
           </p>
 
           {/* Services */}
-          <div className="mt-12 text-muted text-xs sm:text-sm md:text-base leading-relaxed animate-fade-in-delay-2 text-center px-2">
-            {/* Mobile: flowing text */}
-            <p className="sm:hidden">
+          <div className="mt-12 text-muted text-xs sm:text-sm md:text-base leading-loose animate-fade-in-delay-2 text-center w-full">
+            {/* Mobile: flex wrap for proper line breaks */}
+            <div className="sm:hidden flex flex-wrap justify-center gap-x-1 gap-y-1 px-4">
               {services.map((service, index) => (
-                <span key={service}>
+                <span key={service} className="whitespace-nowrap">
                   {service}
-                  {index < services.length - 1 && <span className="mx-1 opacity-30">·</span>}
+                  {index < services.length - 1 && <span className="ml-1 opacity-30">·</span>}
                 </span>
               ))}
-            </p>
+            </div>
             {/* Desktop: two rows */}
             <div className="hidden sm:block">
               <p>
