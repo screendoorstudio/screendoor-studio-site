@@ -212,10 +212,10 @@ export default function ScreenDoor() {
         <div
           className="absolute"
           style={{
-            top: "10px",
-            left: "28px",
-            width: "144px",
-            height: "344px",
+            top: "4px",
+            left: "4px",
+            width: "192px",
+            height: "392px",
             overflow: "hidden",
             borderRadius: "2px",
           }}
