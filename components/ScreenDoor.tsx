@@ -217,10 +217,6 @@ export default function ScreenDoor() {
         </svg>
       </div>
 
-      {/* Instruction text */}
-      <p className="text-muted text-xs mt-4 text-center opacity-60 transition-opacity hover:opacity-100">
-        {isOpen ? "click to close" : "click to open"}
-      </p>
     </div>
   );
 }

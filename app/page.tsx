@@ -4,17 +4,19 @@ import ScreenDoor from "@/components/ScreenDoor";
 
 export default function Home() {
   const services = [
-    "words",
-    "music",
-    "video",
-    "design",
-    "products",
     "marketing",
-    "business",
-    "non-profits",
-    "consulting",
-    "AI",
+    "design",
     "research",
+    "strategy",
+    "writing",
+    "video",
+    "music",
+    "products",
+    "apps",
+    "analytics",
+    "lead generation",
+    "AI integration",
+    "consulting",
   ];
 
   return (
