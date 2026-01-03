@@ -5,10 +5,9 @@ import { useState, useRef, useCallback, useEffect } from "react";
 const hubbleImages = [
   "/hubble/hudf-1024px.jpg",
   "/hubble/hudf-2014.webp",
-  "/hubble/hdf-south.webp",
   "/hubble/hxdf-extreme.webp",
   "/hubble/hdf-central-portion.webp",
-  "/hubble/hdf-sample-galaxies.jpg",
+  "/hubble/abell370-frontier.png",
 ];
 
 export default function ScreenDoor() {
