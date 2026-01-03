@@ -14,40 +14,84 @@ export default function ScreenDoor() {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentImage, setCurrentImage] = useState(hubbleImages[0]);
-  const creakAudioRef = useRef<HTMLAudioElement | null>(null);
-  const slamAudioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioReady, setAudioReady] = useState(false);
 
-  // Preload audio files
-  useEffect(() => {
-    creakAudioRef.current = new Audio("/door-creak.mp3");
-    slamAudioRef.current = new Audio("/door-slam.mp3");
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const creakBufferRef = useRef<AudioBuffer | null>(null);
+  const slamBufferRef = useRef<AudioBuffer | null>(null);
 
-    creakAudioRef.current.load();
-    slamAudioRef.current.load();
+  // Initialize Web Audio API on first user interaction for mobile support
+  const initAudio = useCallback(async () => {
+    if (audioContextRef.current) return;
+
+    try {
+      audioContextRef.current = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+
+      // Fetch and decode audio files
+      const [creakResponse, slamResponse] = await Promise.all([
+        fetch("/door-creak.mp3"),
+        fetch("/door-slam.mp3"),
+      ]);
+
+      const [creakData, slamData] = await Promise.all([
+        creakResponse.arrayBuffer(),
+        slamResponse.arrayBuffer(),
+      ]);
+
+      const [creakBuffer, slamBuffer] = await Promise.all([
+        audioContextRef.current.decodeAudioData(creakData),
+        audioContextRef.current.decodeAudioData(slamData),
+      ]);
+
+      creakBufferRef.current = creakBuffer;
+      slamBufferRef.current = slamBuffer;
+      setAudioReady(true);
+    } catch (e) {
+      console.log("Audio init failed:", e);
+    }
+  }, []);
+
+  const playSound = useCallback((buffer: AudioBuffer | null) => {
+    if (!audioContextRef.current || !buffer) return;
+
+    // Resume context if suspended (mobile requirement)
+    if (audioContextRef.current.state === "suspended") {
+      audioContextRef.current.resume();
+    }
+
+    const source = audioContextRef.current.createBufferSource();
+    source.buffer = buffer;
+    source.connect(audioContextRef.current.destination);
+    source.start(0);
   }, []);
 
   const playCreak = useCallback(() => {
-    if (creakAudioRef.current) {
-      creakAudioRef.current.currentTime = 0;
-      creakAudioRef.current.play();
-    }
-  }, []);
+    playSound(creakBufferRef.current);
+  }, [playSound]);
 
   const playSlam = useCallback(() => {
-    if (slamAudioRef.current) {
-      slamAudioRef.current.currentTime = 0;
-      slamAudioRef.current.play();
-    }
-  }, []);
+    playSound(slamBufferRef.current);
+  }, [playSound]);
 
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback(async () => {
     if (isAnimating) return;
+
+    // Initialize audio on first interaction (required for mobile)
+    const needsInit = !audioContextRef.current;
+    if (needsInit) {
+      await initAudio();
+    }
 
     setIsAnimating(true);
 
     if (!isOpen) {
       // Opening - play creaky sound and pick random image
-      playCreak();
+      // Small delay on first click to ensure audio is ready
+      if (needsInit) {
+        setTimeout(() => playCreak(), 50);
+      } else {
+        playCreak();
+      }
       const randomImage = hubbleImages[Math.floor(Math.random() * hubbleImages.length)];
       setCurrentImage(randomImage);
     }
@@ -64,7 +108,7 @@ export default function ScreenDoor() {
     setTimeout(() => {
       setIsAnimating(false);
     }, 600);
-  }, [isAnimating, isOpen, playCreak, playSlam]);
+  }, [isAnimating, isOpen, playCreak, playSlam, initAudio]);
 
 
   return (
